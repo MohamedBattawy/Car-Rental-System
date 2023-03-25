@@ -1,0 +1,108 @@
+<html>
+    <head>
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+<style type="text/css">
+    body{
+     background-color: lightblue;
+     text-align: center;
+    }
+ input{
+ border:1px solid olive;
+ border-radius:5px;
+ }
+ text{
+    padding: 3px;
+    font-size:15px;
+    text-align:center;
+    margin: 0;
+ }
+ h1{
+  color:darkgreen;
+  font-size:25px;
+  text-align:center;
+ }
+ img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+ }
+ input[type=button], input[type=submit], input[type=reset] {
+  background-color: darkgreen;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+<body>
+    <title>Login</title>
+    <img src="png_server_72492.png" alt="HTML5 Icon" width="200" height="200">
+    <h1>Login</h1>
+    <form method="post">
+     <text>Email:</text> <input type='text' name='email'> <br> <br> <br>
+     <text>Password:</text> <input type='password' name='pwd'> <br> <br> <br>
+    <input type='submit' name='submit' value='Login'>
+</form>
+<form action="RegisterUser.php">
+    <input type="submit" value="Register" />
+</form>
+
+<?php
+session_start();
+if(isset($_POST['submit']))
+{
+ $connection=mysqli_connect('localhost','root','');
+echo $connection ? 'connected' : 'not connected';
+ mysqli_select_db($connection,"car_rental_system");
+ $email=$_POST['email'];
+ $pwd=$_POST['pwd'];
+ if($email=='')
+ {
+    echo 'Missing e-mail';
+ }
+    elseif($pwd==''){
+        echo 'Missing password';
+    }
+    else{
+   $query=mysqli_query($connection,"select * from admin where e_mail='".$email."' and pass='".$pwd."'");
+   $res=mysqli_fetch_row($query);
+   if($res)
+   {
+    //$name=$res[2];
+    //echo $name;
+    //$_SESSION['name']=$name;
+    header('location:WelcomeAdmin.php');
+   }
+   else
+   {
+    $query=mysqli_query($connection,"select * from office where e_mail='".$email."' and pass='".$pwd."'");
+   $res=mysqli_fetch_row($query);
+   if($res)
+   {
+    //$name=$res[2];
+    //echo $name;
+    //$_SESSION['name']=$name;
+    header('location:WelcomeOffice.php');
+   }
+   else {
+    $query=mysqli_query($connection,"select * from customer where e_mail='".$email."' and pass='".$pwd."'");
+    $res=mysqli_fetch_row($query);
+    if($res)
+    {
+     //$name=$res[2];
+     //echo $name;
+     //$_SESSION['name']=$name;
+     header('location:WelcomeUser.php');
+   }
+   }
+}
+}
+}
+?>
+    </body>
+</html>

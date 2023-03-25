@@ -1,0 +1,38 @@
+
+
+body{
+    background-color: lightblue;
+    text-align: center;
+   }
+
+   td, th {
+    text-align: left;
+    padding: 8px;
+  }
+  tr{
+    border-bottom: 1px solid black;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 5px;
+    border-radius: 15px;
+  }
+  h1{
+    color:darkgreen;
+    font-size:25px;
+    text-align:center;
+   }
+
+   h2{
+    color:darkgreen;
+    font-size:20px;
+    text-align:left;
+   }
+   h3{
+    
+    font-size:17px;
+    text-align:left;
+   }
+   
